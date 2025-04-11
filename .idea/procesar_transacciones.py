@@ -55,17 +55,11 @@ def procesar_transacciones(ruta_archivo):
         balance_final = balance_credito - balance_debito
 
         # Imprime el reporte de transacciones bancarias
-        print("\n--- Reporte de Transacciones Bancarias ---")
+        print("\nReporte de Transacciones Bancarias")
+        print("---------------------------------------------")
         print(f"Balance Final: ${balance_final:.2f}")  # Muestra el balance final con dos decimales
-        print("\n--- Transacción de Mayor Monto ---")
-        # Verifica si se encontraron transacciones para mostrar la de mayor monto
-        if transaccion_mayor_monto['id']:
-            print(f"ID: {transaccion_mayor_monto['id']}, Monto: ${transaccion_mayor_monto['monto']:.2f}")
-        else:
-            print("No se encontraron transacciones.")
-        print("\n--- Conteo de Transacciones ---")
-        print(f"Crédito: {conteo_credito}")  # Muestra el número total de transacciones de crédito
-        print(f"Débito: {conteo_debito}")    # Muestra el número total de transacciones de débito
+        print(f"Transacción de Mayor Monto: ID: {transaccion_mayor_monto['id']} - {transaccion_mayor_monto['monto']:.2f}") # Muestra la transacción de mayor monto
+        print(f"Conteo de Transacciones: Crédito: {conteo_credito} Débito: {conteo_debito}") # Muestra el número total de transacciones de crédito y débito
 
     except FileNotFoundError:
         # Captura el error si el archivo especificado no se encuentra
