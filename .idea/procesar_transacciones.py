@@ -6,7 +6,7 @@ def procesar_transacciones(ruta_archivo):
     # Inicialización de variables para almacenar los resultados
     balance_credito = 0.0  # Suma de todos los montos de crédito
     balance_debito = 0.0   # Suma de todos los montos de débito
-    transaccion_mayor_monto = {"ID": None, "Monto": 0.0}  # Diccionario para almacenar la transacción de mayor monto
+    transaccion_mayor_monto = {"id": None, "monto": 0.0}  # Diccionario para almacenar la transacción de mayor monto
     conteo_credito = 0     # Contador de transacciones de tipo Crédito
     conteo_debito = 0      # Contador de transacciones de tipo Débito
 
@@ -20,28 +20,28 @@ def procesar_transacciones(ruta_archivo):
             for fila in lector_csv:
                 try:
                     # Obtiene el tipo de transacción, elimina espacios en blanco y lo convierte a minúsculas para comparar
-                    tipo = fila['Tipo'].strip().lower()
+                    tipo = fila['tipo'].strip().lower()
                     # Obtiene el monto de la transacción y lo convierte a un número de punto flotante
-                    monto = float(fila['Monto'])
+                    monto = float(fila['monto'])
                     # Obtiene el ID de la transacción
-                    id_transaccion = fila['ID']
+                    id_transaccion = fila['id']
 
                     # Procesa las transacciones de tipo crédito
                     if tipo == 'crédito':
                         balance_credito += monto  # Suma el monto al balance de crédito
                         conteo_credito += 1      # Incrementa el contador de créditos
                         # Verifica si la transacción actual tiene un monto mayor que la transacción de mayor monto encontrada hasta ahora
-                        if monto > transaccion_mayor_monto['Monto']:
-                            transaccion_mayor_monto['Monto'] = monto  # Actualiza el monto mayor
-                            transaccion_mayor_monto['ID'] = id_transaccion  # Actualiza el ID de la transacción de mayor monto
+                        if monto > transaccion_mayor_monto['monto']:
+                            transaccion_mayor_monto['monto'] = monto  # Actualiza el monto mayor
+                            transaccion_mayor_monto['id'] = id_transaccion  # Actualiza el ID de la transacción de mayor monto
                     # Procesa las transacciones de tipo débito
                     elif tipo == 'débito':
                         balance_debito += monto   # Suma el monto al balance de débito
                         conteo_debito += 1       # Incrementa el contador de débitos
                         # Verifica si la transacción actual tiene un monto mayor que la transacción de mayor monto encontrada hasta ahora
-                        if monto > transaccion_mayor_monto['Monto']:
-                            transaccion_mayor_monto['Monto'] = monto  # Actualiza el monto mayor
-                            transaccion_mayor_monto['ID'] = id_transaccion  # Actualiza el ID de la transacción de mayor monto
+                        if monto > transaccion_mayor_monto['monto']:
+                            transaccion_mayor_monto['monto'] = monto  # Actualiza el monto mayor
+                            transaccion_mayor_monto['id'] = id_transaccion  # Actualiza el ID de la transacción de mayor monto
                 except KeyError as e:
                     # Captura el error si una columna esperada Tipo, Monto o ID no se encuentra en el CSV
                     print(f"Error: La columna '{e}' no se encontró en el archivo CSV.")
@@ -59,8 +59,8 @@ def procesar_transacciones(ruta_archivo):
         print(f"Balance Final: ${balance_final:.2f}")  # Muestra el balance final con dos decimales
         print("\n--- Transacción de Mayor Monto ---")
         # Verifica si se encontraron transacciones para mostrar la de mayor monto
-        if transaccion_mayor_monto['ID']:
-            print(f"ID: {transaccion_mayor_monto['ID']}, Monto: ${transaccion_mayor_monto['Monto']:.2f}")
+        if transaccion_mayor_monto['id']:
+            print(f"ID: {transaccion_mayor_monto['id']}, Monto: ${transaccion_mayor_monto['monto']:.2f}")
         else:
             print("No se encontraron transacciones.")
         print("\n--- Conteo de Transacciones ---")
