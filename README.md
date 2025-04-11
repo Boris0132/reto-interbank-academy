@@ -1,66 +1,67 @@
-# Reto Técnico: Procesamiento de Transacciones Bancarias (CLI)
+# Reporte de Transacciones Bancarias - Aplicación de Línea de Comandos
 
-## Objetivo:
+## Introducción
 
-Desarrolla una aplicación de línea de comandos (CLI) que procese un archivo CSV con transacciones bancarias y genere un reporte que incluya:
+Este proyecto consiste en una aplicación de línea de comandos (CLI) desarrollada en Python para procesar un archivo CSV que contiene transacciones bancarias. El objetivo de esta aplicación es analizar los datos de las transacciones y generar un reporte con información como el balance final, transacción de mayor monto y conteo de transacciones por tipo.
 
-- **Balance Final:**  
-  Suma de los montos de las transacciones de tipo "Crédito" menos la suma de los montos de las transacciones de tipo "Débito".
+## Instrucciones de Ejecución
 
-- **Transacción de Mayor Monto:**  
-  Identificar el ID y el monto de la transacción con el valor más alto.
+1.  **Prerrequisitos:**
+   * Asegúrate de tener Python instalado en tu sistema. Puedes verificar la instalación abriendo la terminal o el símbolo del sistema y ejecutando el comando:
+       ```bash
+       python --version
+       ```
+     o
+       ```bash
+       python3 --version
+       ```
 
-- **Conteo de Transacciones:**  
-  Número total de transacciones para cada tipo ("Crédito" y "Débito").
+2. **Preparar el archivo CSV:**
+   * Crea un archivo CSV (por ejemplo, `data.csv`) con los datos de las transacciones bancarias. El archivo debe tener una estructura con las siguientes columnas y encabezados en la primera fila:
+      * `id`: Identificador único de la transacción.
+      * `tipo`: Tipo de transacción, debe ser "Crédito" o "Débito".
+      * `monto`: Valor numérico de la transacción.
+   * Asegúrate de que el archivo CSV esté ubicado en una ruta accesible por la aplicación.
 
----
+3. **Ejecutar la aplicación:**
+   * Abre la terminal o el símbolo del sistema.
+   * Navega hasta el directorio donde guardaste el archivo `procesar_transacciones.py`.
+   * Ejecuta el script de Python pasando la ruta del archivo CSV como argumento:
+       ```bash
+       python procesar_transacciones.py ruta_del_archivo.csv
+       ```
+     Reemplaza `ruta_del_archivo.csv` con la ruta real a tu archivo CSV (por ejemplo, `data.csv` si está en el mismo directorio, o `C:\ruta\al\archivo\data.csv` si está en otra ubicación).
 
-## Instrucciones
+## Enfoque y Solución
 
-1. **Repositorio Base:**  
-   Clona o haz un fork del repositorio base disponible en:  
-   `https://github.com/codeableorg/interbank-academy-25`
+La lógica implementada en la aplicación se centra en los siguientes pasos:
 
-2. **Entrada de Datos:**  
-   La aplicación deberá leer un archivo CSV. Ejemplo de contenido:
+1.  **Lectura del archivo CSV:** Se utiliza la librería `csv` de Python para leer el contenido del archivo CSV, interpretando la primera fila como los encabezados de las columnas. Se asume que el archivo contiene las columnas "id", "tipo" y "monto".
 
-   ```
-   id,tipo,monto
-   1,Crédito,100.00
-   2,Débito,50.00
-   3,Crédito,200.00
-   4,Débito,75.00
-   5,Crédito,150.00
-   ```
+2.  **Procesamiento de transacciones:** Se itera a través de cada fila del archivo CSV. Para cada transacción, se realiza lo siguiente:
+   * Se verifica el tipo de transacción ("Crédito" o "Débito").
+   * Se convierte el monto a un valor numérico para realizar cálculos.
+   * Se actualizan las variables para calcular el balance de créditos y débitos, identificar la transacción de mayor monto y contar el número de transacciones por tipo.
 
-3. **Salida del Programa:**  
-   La aplicación debe mostrar el reporte final en la terminal.  
-   Ejemplo de salida:
+3.  **Cálculo del balance final:** El balance final se calcula restando la suma total de los montos de débito a la suma total de los montos de crédito.
 
-   ```
-   Reporte de Transacciones
-   ---------------------------------------------
-   Balance Final: 325.00
-   Transacción de Mayor Monto: ID 3 - 200.00
-   Conteo de Transacciones: Crédito: 3 Débito: 2
-   ```
+4.  **Identificación de la transacción de mayor monto:** Durante la iteración, se compara el monto de cada transacción con el monto de la transacción más alta encontrada hasta el momento. Se almacena el id y el monto de la transacción con el valor más alto.
 
-4. **Lenguaje de Programación:**  
-   Utiliza el lenguaje de tu preferencia. Opciones recomendadas:
+5.  **Conteo de transacciones por tipo:** Se utilizan contadores separados para llevar el registro del número de transacciones de tipo "Crédito" y "Débito".
 
-   - Python
-   - Java
-   - C#
-   - JavaScript (Node.js)
+6.  **Generación del reporte:** La aplicación imprime en la consola un reporte con el balance final, información de la transacción de mayor monto y el conteo de transacciones por cada tipo.
 
-5. **README del Proyecto:**  
-   Incluye un archivo `README.md` con la siguiente estructura:
+**Decisiones de Diseño:**
 
-   - **Introducción:** Breve descripción del reto y su propósito.
-   - **Instrucciones de Ejecución:** Cómo instalar dependencias y ejecutar la aplicación.
-   - **Enfoque y Solución:** Lógica implementada y decisiones de diseño.
-   - **Estructura del Proyecto:** Archivos y carpetas principales.
+* Se optó por una aplicación CLI para facilitar la ejecución.
+* Se utilizó la librería `csv` de Python, que es la forma más eficiente de trabajar con archivos CSV en Python.
+* Se incluyó manejo básico de errores para casos como la no existencia del archivo CSV o problemas con el formato de los datos (columnas faltantes o valores no numéricos en el monto).
+* Se utilizaron nombres de variables descriptivos para mejorar la legibilidad del código.
 
-6. **Documentación y Calidad del Código:**
-   - Código bien documentado y fácil de leer.
-   - Comentarios explicando pasos clave y lógica del programa.
+## Estructura del Proyecto
+
+El proyecto consiste en los siguientes archivos principales:
+
+* `procesar_transacciones.py`: Este archivo contiene el código fuente de la aplicación.
+* `README.md`: Este archivo proporciona información general sobre el proyecto, instrucciones de ejecución, enfoque de la solución y estructura del proyecto.
+* `datacsv` Es el archivo CSV que contiene los datos de las transacciones bancarias. Este es el archivo que la aplicación procesa.
