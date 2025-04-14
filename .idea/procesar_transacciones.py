@@ -45,11 +45,11 @@ def procesar_transacciones(ruta_archivo):
                 except KeyError as e:
                     # Captura el error si una columna esperada Tipo, Monto o ID no se encuentra en el CSV
                     print(f"Error: La columna '{e}' no se encontró en el archivo CSV.")
-                    return  # Sale de la función si falta una columna esencial
+                    return
                 except ValueError:
                     # Captura el error si el valor de Monto no puede ser convertido a un número
                     print(f"Error: El valor de 'Monto' para la transacción con ID '{fila.get('ID', 'Desconocido')}' no es un número válido.")
-                    return  # Sale de la función si hay un valor de monto inválido
+                    return
 
         # Calcula el balance final restando el total de débitos al total de créditos
         balance_final = balance_credito - balance_debito
@@ -68,7 +68,7 @@ def procesar_transacciones(ruta_archivo):
         # Captura cualquier otro error inesperado durante el procesamiento del archivo
         print(f"Ocurrió un error inesperado: {e}")
 
-# Este bloque de código se ejecuta solo cuando el script se llama directamente (no cuando se importa como un módulo)
+# Este bloque de código se ejecuta cuando el script se llama directamente
 if __name__ == "__main__":
     # Verifica si el número de argumentos de la línea de comandos es el correcto (el nombre del script y la ruta del archivo)
     if len(sys.argv) != 2:
